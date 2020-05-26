@@ -9,6 +9,7 @@ import net.corda.core.identity.AbstractParty;
 import net.corda.core.identity.Party;
 import net.corda.core.transactions.LedgerTransaction;
 
+import net.corda.finance.Currencies;
 import net.corda.finance.contracts.asset.Cash;
 import net.corda.training.state.IOUState;
 
@@ -67,6 +68,9 @@ public class IOUContract implements Contract {
                 IOUState outputState = tx.outputsOfType(IOUState.class).get(0);
                 require.using( "A newly issued IOU must have a positive amount.", outputState.amount.getQuantity() > 0);
                 require.using( "The lender and borrower cannot have the same identity.", outputState.lender.getOwningKey() != outputState.borrower.getOwningKey());
+                /* add */
+                //require.using( "Only one pounds.", outputState.amount.getQuantity() == 1 );
+                require.using( "Only one pounds.", outputState.amount.getQuantity() == Currencies.POUNDS(1).getQuantity());
 
                 List<PublicKey> signers = tx.getCommands().get(0).getSigners();
                 HashSet<PublicKey> signersSet = new HashSet<>();

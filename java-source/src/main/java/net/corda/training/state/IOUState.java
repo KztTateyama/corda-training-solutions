@@ -9,6 +9,7 @@ import com.google.common.collect.ImmutableList;
 import net.corda.core.serialization.ConstructorForDeserialization;
 import net.corda.core.serialization.CordaSerializable;
 import net.corda.training.contract.IOUContract;
+import org.jetbrains.annotations.NotNull;
 
 import javax.servlet.http.Part;
 
@@ -63,6 +64,7 @@ public class IOUState implements ContractState, LinearState {
         return paid;
     }
 
+    @NotNull
     @Override
     public UniqueIdentifier getLinearId() {
         return linearId;

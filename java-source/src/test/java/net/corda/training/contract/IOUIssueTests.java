@@ -281,4 +281,25 @@ public class IOUIssueTests {
             return null;
         });
     }
+
+    /* Only One Pounds .*/
+    @Test
+    public void IssueMustOnePounds() {
+        IOUState iou1 = new IOUState(Currencies.POUNDS(1), ALICE.getParty(), BOB.getParty());
+        IOUState iou2 = new IOUState(Currencies.POUNDS(2), ALICE.getParty(), BOB.getParty());
+        ledger(ledgerServices, l -> {
+            l.transaction(tx -> {
+                tx.command(Arrays.asList(ALICE.getPublicKey(), BOB.getPublicKey()), new IOUContract.Commands.Issue());
+                tx.output(IOUContract.IOU_CONTRACT_ID, iou2);
+                return tx.fails();
+            });
+            l.transaction(tx -> {
+                tx.command(Arrays.asList(ALICE.getPublicKey(), BOB.getPublicKey()), new IOUContract.Commands.Issue());
+                tx.output(IOUContract.IOU_CONTRACT_ID, iou1);
+                return tx.verifies();
+            });
+            return null;
+        });
+
+    }
 }
