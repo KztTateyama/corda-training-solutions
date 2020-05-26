@@ -182,7 +182,8 @@ public class IOUIssueFlowTests {
     public void flowReturnsTransactionSignedByBothParties() throws Exception {
         Party lender = a.getInfo().getLegalIdentitiesAndCerts().get(0).getParty();
         Party borrower = b.getInfo().getLegalIdentitiesAndCerts().get(0).getParty();
-        IOUState iou = new IOUState(Currencies.POUNDS(10), lender, borrower);
+//        IOUState iou = new IOUState(Currencies.POUNDS(10), lender, borrower);
+        IOUState iou = new IOUState(Currencies.POUNDS(1), lender, borrower);
         IOUIssueFlow.InitiatorFlow flow = new IOUIssueFlow.InitiatorFlow(iou);
 
         Future<SignedTransaction> future = a.startFlow(flow);
@@ -208,7 +209,8 @@ public class IOUIssueFlowTests {
     public void flowRecordsTheSameTransactionInBothPartyVaults() throws Exception {
         Party lender = a.getInfo().getLegalIdentitiesAndCerts().get(0).getParty();
         Party borrower = b.getInfo().getLegalIdentitiesAndCerts().get(0).getParty();
-        IOUState iou = new IOUState(Currencies.POUNDS(10), lender, borrower);
+//        IOUState iou = new IOUState(Currencies.POUNDS(10), lender, borrower);
+        IOUState iou = new IOUState(Currencies.POUNDS(1), lender, borrower);
         IOUIssueFlow.InitiatorFlow flow = new IOUIssueFlow.InitiatorFlow(iou);
 
         Future<SignedTransaction> future = a.startFlow(flow);
