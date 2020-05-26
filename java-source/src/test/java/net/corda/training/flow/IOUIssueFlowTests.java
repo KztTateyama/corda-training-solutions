@@ -37,6 +37,8 @@ public class IOUIssueFlowTests {
 
     private MockNetwork mockNetwork;
     private StartedMockNode a, b;
+    //add
+    private StartedMockNode c,d,e;
 
     @Before
     public void setup() {
@@ -51,9 +53,19 @@ public class IOUIssueFlowTests {
         a = mockNetwork.createNode(new MockNodeParameters());
         b = mockNetwork.createNode(new MockNodeParameters());
 
+        //add
+        c = mockNetwork.createNode(new MockNodeParameters());
+        d = mockNetwork.createNode(new MockNodeParameters());
+        e = mockNetwork.createNode(new MockNodeParameters());
+
         ArrayList<StartedMockNode> startedNodes = new ArrayList<>();
         startedNodes.add(a);
         startedNodes.add(b);
+
+        //add
+        startedNodes.add(c);
+        startedNodes.add(d);
+        startedNodes.add(e);
 
         // For real nodes this happens automatically, but we have to manually register the flow for tests
         startedNodes.forEach(el -> el.registerInitiatedFlow(IOUIssueFlow.ResponderFlow.class));
